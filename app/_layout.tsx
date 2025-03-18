@@ -11,7 +11,6 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import "../global.css";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { getLinkData } from "@/utils/link-utils";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -31,16 +30,12 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-  useEffect(() => {
-    getLinkData(
-      "https://dev.to/nickkeepkind/game-design-cannibals-whos-eating-aaa-games-and-why-2c0c"
-    );
-  }, []);
+
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack initialRouteName="linklist">
-        <Stack.Screen name="linklist" options={{ headerShown: false }} />
-        {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
